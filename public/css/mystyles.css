@@ -1,0 +1,188 @@
+body {
+  overflow-x: hidden;
+}
+
+.main-header {
+  color: "white";
+  padding-top: "3rem";
+  padding-bottom: "2rem";
+}
+
+.search-form-header {
+  text-align: left;
+  padding-left: 0rem;
+  padding-top: 1rem;
+}
+
+.city-searches {
+  margin-top: 3rem;
+  padding: 2rem;
+  padding-top: 0rem;
+  width: 65%;
+  background-color: white;
+}
+
+.date {
+  width: 100%;
+}
+
+.date-time {
+  padding-top: 1.3rem;
+}
+
+.not-found {
+  margin-bottom: 3rem;
+}
+
+.to-homepage:hover {
+  color: #ed8323;
+}
+
+.btn-orange {
+  background-color: #ed8323;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  color: white;
+}
+
+.accOptions {
+  position: relative;
+  left: 10rem;
+}
+
+@media (max-width: 992px) {
+  .city-searches {
+    width: 100%;
+  }
+  .accOptions {
+    padding-top: 0;
+  }
+  .contact {
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .top-padding {
+    padding-top: 1.25rem;
+  }
+  .accOptions {
+    position: relative;
+    left: 65%;
+  }
+  .select-button {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+  .car-img-div {
+    text-align: center;
+  }
+  .top-margin {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 767px) {
+  .car-images {
+    float: left;
+    display: block;
+    margin: auto;
+  }
+  .price {
+    margin-left: 1rem;
+  }
+}
+
+.car-images {
+  height: 100%;
+  width: 40%;
+}
+
+.results-page {
+  margin: 2rem;
+  height: 100%;
+}
+
+.select-button {
+  margin-bottom: 1rem;
+}
+
+.search-update {
+  margin: auto;
+  padding: 1rem;
+  border: solid #ed8323;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.car {
+  border: solid #ed8323;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.search-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.align {
+  text-align: center;
+  margin-top: 1rem;
+}
+.car-selection-img-div {
+    text-align: center;
+}
+.car-selection-img {
+  width: 60%;
+}
+.car-props {
+  padding: 0.75rem;
+  border: thin solid #ed8323;
+  background-color: #d3d3d3;
+  margin: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+.totals-table {
+  padding: 0.75rem;
+  border: thin solid #ed8323;
+  background-color: #d3d3d3;
+  margin: 1rem 0;
+}
+.details {
+  padding: 0.75rem;
+  border: thin solid #ed8323;
+  background-color: #d3d3d3;
+  margin: 1rem 0;
+}
+
+hr {
+    width: 100%
+}
+
+.extra-div {
+  padding: 0.75rem;
+  border: thin solid #ed8323;
+  background-color: #d3d3d3;
+  text-align: center; 
+  margin-bottom: 1rem;
+}
+
+.insurance-div {
+  padding: 1rem 0 0;
+  border: thin solid #ed8323;
+  background-color: #d3d3d3;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.btn-checkout{
+  margin-bottom: 2rem;
+  margin-left: 0;
+  width: 30%
+}
+
+
