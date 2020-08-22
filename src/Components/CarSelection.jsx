@@ -351,15 +351,27 @@ function CarSelection(props) {
         </div>
       </div>
 
-      <div style={{ textAlign: "center" }}>
+     { rates.reservation.extras && <div style={{ textAlign: "center" }}>
         <h2>Optional Extras</h2>
         <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
           Check the ones you want
         </h6>
-      </div>
+      </div> }
       <div className="row">
-        {rates.reservation.extras.map((extra, index) => {
-          return (
+        {rates.reservation.extras && rates.reservation.extras.map((extra, index) => {
+         return extra.total_owed === 0 
+          ? (
+            <div
+              key={index + 1}
+              className="col-lg-2 col-md-3 col-sm-4 extra-div"
+            >
+              <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
+              <h5>
+                Default
+              </h5>
+            </div>
+          )
+          :(
             <div
               key={index + 1}
               className="col-lg-2 col-md-3 col-sm-4 extra-div"
@@ -385,16 +397,28 @@ function CarSelection(props) {
           );
         })}
       </div>
-      <div style={{ textAlign: "center" }}>
+      {rates.reservation.insurance && <div style={{ textAlign: "center", marginTop:"0.5rem" }}>
         <h2>Insurances</h2>
         <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
           Check the ones you want
         </h6>
-      </div>
+      </div>}
       <div className="row">
-        {rates.reservation.insurance.map((ins, index) => {
-          return (
-            <div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
+        {rates.reservation.insurance && rates.reservation.insurance.map((ins, index) => {
+          return ins.total_owed === 0 
+          ? (<div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
+              <h4 style={{ marginBottom: "0" }}>
+                {ins.name.substring(0, ins.name.length - 6)}
+              </h4>
+              <h4>
+                {ins.name.substring(ins.name.length - 5, ins.name.length)}
+              </h4>
+              <h5>
+                Default
+              </h5>
+            </div>
+          )
+          : (<div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
               <h4 style={{ marginBottom: "0" }}>
                 {ins.name.substring(0, ins.name.length - 6)}
               </h4>
