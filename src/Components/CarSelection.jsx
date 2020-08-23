@@ -74,14 +74,13 @@ function CarSelection(props) {
       ? setExtras((prev) => Number(prev) + Number(price))
       : setExtras((prev) => Number(prev) - Number(price));
 
-    rates.reservation.extras[e.target.id].quantity = 1
+    rates.reservation.extras[e.target.id].quantity = 1;
 
     setExtrasArray(() => {
-      return rates.reservation.extras.filter((extra, index) => {
-      return document.getElementById(index).checked === true ? extra : null
-    })
-  }) 
-
+      return rates.reservation.extras.filter((extra, index) =>
+        document.getElementById(index).checked === true ? extra : null
+      );
+    });
   };
 
   const handleInsChange = (e) => {
@@ -106,19 +105,23 @@ function CarSelection(props) {
     document.getElementById(e.target.id).checked
       ? setInsurance((prev) => Number(prev) + Number(price))
       : setInsurance((prev) => Number(prev) - Number(price));
-    
-      rates.reservation.insurance[e.target.id - 14].selected = !rates.reservation.insurance[e.target.id - 14].selected
-      
-      document.getElementById(e.target.id).checked
-      ? rates.reservation.insurance[e.target.id - 14].selection_note = "ACCEPTED"
-      : rates.reservation.insurance[e.target.id - 14].selection_note = "DECLINED";
 
-      setInsuranceArray(() => {
-        return rates.reservation.insurance.filter((ins, index) => {
-        return document.getElementById(index+14).checked === true ? ins : null
-      })
-    }) 
-  
+    rates.reservation.insurance[e.target.id - 14].selected = !rates.reservation
+      .insurance[e.target.id - 14].selected;
+
+    document.getElementById(e.target.id).checked
+      ? (rates.reservation.insurance[e.target.id - 14].selection_note =
+          "ACCEPTED")
+      : (rates.reservation.insurance[e.target.id - 14].selection_note =
+          "DECLINED");
+
+    setInsuranceArray(() => {
+      return rates.reservation.insurance.filter((ins, index) => {
+        return document.getElementById(index + 14).checked === true
+          ? ins
+          : null;
+      });
+    });
   };
 
   // console.log(extrasArray);
@@ -351,99 +354,99 @@ function CarSelection(props) {
         </div>
       </div>
 
-     { rates.reservation.extras && <div style={{ textAlign: "center" }}>
-        <h2>Optional Extras</h2>
-        <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
-          Check the ones you want
-        </h6>
-      </div> }
+      {rates.reservation.extras && (
+        <div style={{ textAlign: "center" }}>
+          <h2>Optional Extras</h2>
+          <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
+            Check the ones you want
+          </h6>
+        </div>
+      )}
       <div className="row">
-        {rates.reservation.extras && rates.reservation.extras.map((extra, index) => {
-         return extra.total_owed === 0 
-          ? (
-            <div
-              key={index + 1}
-              className="col-lg-2 col-md-3 col-sm-4 extra-div"
-            >
-              <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
-              <h5>
-                Default
-              </h5>
-            </div>
-          )
-          :(
-            <div
-              key={index + 1}
-              className="col-lg-2 col-md-3 col-sm-4 extra-div"
-            >
-              <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
-              <input
-                id={index}
-                style={{ margin: "1rem 0" }}
-                type="checkbox"
-                onChange={handleChange}
-              ></input>
-              <h4>
-                <i className="fas fa-rupee-sign"></i>{" "}
-                {rates.reservation.rate_totals.rate.currency === "USD"
-                  ? ((1 / exRates.USD) * extra.total_owed).toFixed(0)
-                  : rates.reservation.rate_totals.rate.currency === "GBP"
-                  ? ((1 / exRates.GBP) * extra.total_owed).toFixed(0)
-                  : rates.reservation.rate_totals.rate.currency === "EUR"
-                  ? ((1 / exRates.EUR) * extra.total_owed).toFixed(0)
-                  : extra.total_owed}
-              </h4>
-            </div>
-          );
-        })}
+        {rates.reservation.extras &&
+          rates.reservation.extras.map((extra, index) => {
+            return extra.total_owed === 0 ? (
+              <div
+                key={index + 1}
+                className="col-lg-2 col-md-3 col-sm-4 extra-div"
+              >
+                <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
+                <h5>Default</h5>
+              </div>
+            ) : (
+              <div
+                key={index + 1}
+                className="col-lg-2 col-md-3 col-sm-4 extra-div"
+              >
+                <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
+                <input
+                  id={index}
+                  style={{ margin: "1rem 0" }}
+                  type="checkbox"
+                  onChange={handleChange}
+                ></input>
+                <h4>
+                  <i className="fas fa-rupee-sign"></i>{" "}
+                  {rates.reservation.rate_totals.rate.currency === "USD"
+                    ? ((1 / exRates.USD) * extra.total_owed).toFixed(0)
+                    : rates.reservation.rate_totals.rate.currency === "GBP"
+                    ? ((1 / exRates.GBP) * extra.total_owed).toFixed(0)
+                    : rates.reservation.rate_totals.rate.currency === "EUR"
+                    ? ((1 / exRates.EUR) * extra.total_owed).toFixed(0)
+                    : extra.total_owed}
+                </h4>
+              </div>
+            );
+          })}
       </div>
-      {rates.reservation.insurance && <div style={{ textAlign: "center", marginTop:"0.5rem" }}>
-        <h2>Insurances</h2>
-        <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
-          Check the ones you want
-        </h6>
-      </div>}
+      {rates.reservation.insurance && (
+        <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
+          <h2>Insurances</h2>
+          <h6 style={{ color: "#808080", marginBottom: "1.5rem" }}>
+            Check the ones you want
+          </h6>
+        </div>
+      )}
       <div className="row">
-        {rates.reservation.insurance && rates.reservation.insurance.map((ins, index) => {
-          return ins.total_owed === 0 
-          ? (<div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
-              <h4 style={{ marginBottom: "0" }}>
-                {ins.name.substring(0, ins.name.length - 6)}
-              </h4>
-              <h4>
-                {ins.name.substring(ins.name.length - 5, ins.name.length)}
-              </h4>
-              <h5>
-                Default
-              </h5>
-            </div>
-          )
-          : (<div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
-              <h4 style={{ marginBottom: "0" }}>
-                {ins.name.substring(0, ins.name.length - 6)}
-              </h4>
-              <h4>
-                {ins.name.substring(ins.name.length - 5, ins.name.length)}
-              </h4>
-              <input
-                id={index + 14}
-                type="checkbox"
-                onChange={handleInsChange}
-                style={{ margin: "1rem 0" }}
-              ></input>
-              <h4>
-                <i className="fas fa-rupee-sign"></i>{" "}
-                {rates.reservation.rate_totals.rate.currency === "USD"
-                  ? ((1 / exRates.USD) * ins.total_owed).toFixed(0)
-                  : rates.reservation.rate_totals.rate.currency === "GBP"
-                  ? ((1 / exRates.GBP) * ins.total_owed).toFixed(0)
-                  : rates.reservation.rate_totals.rate.currency === "EUR"
-                  ? ((1 / exRates.EUR) * ins.total_owed).toFixed(0)
-                  : ins.total_owed}
-              </h4>
-            </div>
-          );
-        })}
+        {rates.reservation.insurance &&
+          rates.reservation.insurance.map((ins, index) => {
+            return ins.total_owed === 0 ? (
+              <div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
+                <h4 style={{ marginBottom: "0" }}>
+                  {ins.name.substring(0, ins.name.length - 6)}
+                </h4>
+                <h4>
+                  {ins.name.substring(ins.name.length - 5, ins.name.length)}
+                </h4>
+                <h5>Default</h5>
+              </div>
+            ) : (
+              <div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
+                <h4 style={{ marginBottom: "0" }}>
+                  {ins.name.substring(0, ins.name.length - 6)}
+                </h4>
+                <h4>
+                  {ins.name.substring(ins.name.length - 5, ins.name.length)}
+                </h4>
+                <input
+                  id={index + 14}
+                  type="checkbox"
+                  onChange={handleInsChange}
+                  style={{ margin: "1rem 0" }}
+                ></input>
+                <h4>
+                  <i className="fas fa-rupee-sign"></i>{" "}
+                  {rates.reservation.rate_totals.rate.currency === "USD"
+                    ? ((1 / exRates.USD) * ins.total_owed).toFixed(0)
+                    : rates.reservation.rate_totals.rate.currency === "GBP"
+                    ? ((1 / exRates.GBP) * ins.total_owed).toFixed(0)
+                    : rates.reservation.rate_totals.rate.currency === "EUR"
+                    ? ((1 / exRates.EUR) * ins.total_owed).toFixed(0)
+                    : ins.total_owed}
+                </h4>
+              </div>
+            );
+          })}
       </div>
       <div style={{ textAlign: "center" }}>
         <Link
@@ -451,7 +454,7 @@ function CarSelection(props) {
             pathname: `/results/${car.category.name}/terms&conditions`,
             state: {
               reservationInfo: {
-                ...location.state
+                ...location.state,
               },
               car: car,
               ex_rates: exRates,
@@ -459,7 +462,7 @@ function CarSelection(props) {
               extras_total: extras,
               insurance_total: insurance,
               user_extras: extrasArray,
-              user_insurance: insuranceArray 
+              user_insurance: insuranceArray,
             },
           }}
         >

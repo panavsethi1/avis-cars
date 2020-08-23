@@ -97,42 +97,42 @@ function OldReservation() {
   console.log(cancel);
   const handleCancelProceed = (e) => {
     if (!cancel.confNum.length || !cancel.lName.length) {
-      e.preventDefault();
       alert("Please fill in all the Details.");
+    } else {
+      Axios.put(
+        "https://stage.abgapiservices.com:443/cars/reservation/v1",
+        {
+          product: {
+            brand: "Avis",
+          },
+          reservation: {
+            email_notification: true,
+            confirmation: {
+              number: cancel.confNum,
+            },
+          },
+          passenger: {
+            contact: {
+              last_name: cancel.lName,
+            },
+          },
+        },
+        {
+          headers: {
+            client_id: "12ba16b2baab4ce68571fcee599fcbf6",
+            access_token: token,
+          },
+        }
+      )
+        .then((res) => {
+          console.log(res.data);
+          setCancelInfo(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data.status.errors[0].reason);
+        });
     }
-    Axios.put(
-      "https://stage.abgapiservices.com:443/cars/reservation/v1",
-      {
-        product: {
-          brand: "Avis",
-        },
-        reservation: {
-          email_notification: true,
-          confirmation: {
-            number: cancel.confNum,
-          },
-        },
-        passenger: {
-          contact: {
-            last_name: cancel.lName,
-          },
-        },
-      },
-      {
-        headers: {
-          client_id: "12ba16b2baab4ce68571fcee599fcbf6",
-          access_token: token,
-        },
-      }
-    )
-      .then((res) => {
-        console.log(res.data);
-        setCancelInfo(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err.response.data.status.errors[0].reason);
-      });
   };
 
   return (
