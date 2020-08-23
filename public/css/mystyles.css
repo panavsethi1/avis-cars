@@ -133,7 +133,7 @@ body {
   margin-top: 1rem;
 }
 .car-selection-img-div {
-    text-align: center;
+  text-align: center;
 }
 .car-selection-img {
   width: 60%;
@@ -160,14 +160,14 @@ body {
 }
 
 hr {
-    width: 100%
+  width: 100%;
 }
 
 .extra-div {
   padding: 0.75rem;
   border: thin solid #ed8323;
   background-color: #d3d3d3;
-  text-align: center; 
+  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -179,10 +179,12 @@ hr {
   margin: 2rem 0;
 }
 
-.btn-checkout{
+.btn-checkout {
   margin-bottom: 2rem;
   margin-left: 0;
-  width: 30%
+  width: 30%;
 }
 
-
+a.res:hover {
+  color: #ed8323;
+}

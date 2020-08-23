@@ -88,11 +88,10 @@ function SearchForm(props) {
           },
         })
       )
-      .catch((err) =>
-        alert(
-          "There was some error! Please refine your search! Try different date/time or fill in all the details correctly."
-        )
-      );
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.status.errors[0].details);
+      });
 
     // if (!pickupDate || !dropoffDate || (!pickupLocation && !props.pickupLoc) || (!dropoffLocation && !props.dropoffLoc)) {
     //     alert("Please fill in all the details.")

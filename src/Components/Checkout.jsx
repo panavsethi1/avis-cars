@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import Axios from "axios";
+import _ from "lodash";
 
 function Checkout() {
   const [user, setUser] = useState({
@@ -19,14 +20,14 @@ function Checkout() {
   const handleFNameChange = (e) => {
     const fName = e.target.value;
     setUser((prev) => {
-      return { ...prev, fName: fName };
+      return { ...prev, fName: _.capitalize(fName) };
     });
   };
 
   const handleLNameChange = (e) => {
     const lName = e.target.value;
     setUser((prev) => {
-      return { ...prev, lName: lName };
+      return { ...prev, lName: _.capitalize(lName) };
     });
   };
 
@@ -109,14 +110,14 @@ function Checkout() {
           console.log(resp);
           history.push(
             `/results/${location.state.info.car.category.name}/reservation`,
-            {res: resp.data, user: user}
+            { res: resp.data, user: user }
           );
         })
         .catch((err) => {
           console.log(err);
-          if(err) {
-            e.preventDefault()
-            alert("There was some error while making the reservation. Please try again after some time.")
+          alert(err.response.data.status.errors[0].details);
+          if (err) {
+            e.preventDefault();
           }
         });
     }
@@ -190,11 +191,13 @@ function Checkout() {
             value={user.address}
             onChange={handleAddressChange}
           />
-            <p style={{ marginBottom: "0" }}>
-              *Please check all the details before proceeding.
-            </p>
+          <p style={{ marginBottom: "0" }}>
+            *Please check all the details before proceeding.
+          </p>
           <Link
-            to={{pathname: `/results/${location.state.info.car.category.name}/reservation`}}
+            to={{
+              pathname: `/results/${location.state.info.car.category.name}/reservation`,
+            }}
           >
             <button
               type="button"

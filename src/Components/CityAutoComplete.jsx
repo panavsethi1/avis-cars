@@ -37,7 +37,13 @@ function CityAutoComplete(props) {
       placeholder={props.placeholder}
       style={props.style}
       onSearch={handleSearch}
-      options={option}
+      options={option.filter((opt) => {
+        return (
+          opt.value !== "Marcos A Gelabert Intl Airport" &&
+          opt.value !== "Roma Downtown" &&
+          opt.value !== "Rome Downtown"
+        );
+      })}
       onSelect={(value) => {
         const loc = locations.find((location) => {
           return location.name === value;
