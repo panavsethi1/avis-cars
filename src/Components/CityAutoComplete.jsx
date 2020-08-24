@@ -41,7 +41,8 @@ function CityAutoComplete(props) {
         return (
           opt.value !== "Marcos A Gelabert Intl Airport" &&
           opt.value !== "Roma Downtown" &&
-          opt.value !== "Rome Downtown"
+          opt.value !== "Rome Downtown" &&
+          opt.value !== "Sondrio"
         );
       })}
       onSelect={(value) => {

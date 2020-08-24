@@ -40,7 +40,7 @@ function Reservation(props) {
       <h4 style={{ marginBottom: "1.5rem" }}>
         Thank you,{" "}
         <span style={{ color: "#ed8323" }}>
-          {info.user.fName.toUpperCase()} {info.user.lName.toUpperCase()}
+          {info.user.fName} {info.user.lName}
         </span>
         . Your car has been reserved.
       </h4>

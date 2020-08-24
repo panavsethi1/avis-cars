@@ -51,7 +51,12 @@ function CarSelection(props) {
   const parsedPickupDate = String(parseISO(location.state.pickup_date));
   const parsedDropoffDate = String(parseISO(location.state.dropoff_date));
 
+  const checkbox = (inx) => {
+    return document.getElementById(inx);
+  };
+
   const handleChange = (e) => {
+    e.persist();
     const price =
       rates.reservation.rate_totals.rate.currency === "USD"
         ? (
@@ -70,20 +75,26 @@ function CarSelection(props) {
           ).toFixed(0)
         : rates.reservation.extras[e.target.id].total_owed;
 
-    document.getElementById(e.target.id).checked
+    checkbox(e.target.id).checked
       ? setExtras((prev) => Number(prev) + Number(price))
       : setExtras((prev) => Number(prev) - Number(price));
 
     rates.reservation.extras[e.target.id].quantity = 1;
 
-    setExtrasArray(() => {
-      return rates.reservation.extras.filter((extra, index) =>
-        document.getElementById(index).checked === true ? extra : null
-      );
+    setExtrasArray((prev) => {
+      // return rates.reservation.extras.filter((extra, index) => {
+      //   return checkbox(index).checked === true ? extra : null;
+      // });
+      return checkbox(e.target.id).checked === true
+        ? [...prev, rates.reservation.extras[e.target.id]]
+        : [...prev].filter(
+            (item) => item.code !== rates.reservation.extras[e.target.id].code
+          );
     });
   };
 
   const handleInsChange = (e) => {
+    e.persist();
     const price =
       rates.reservation.rate_totals.rate.currency === "USD"
         ? (
@@ -102,25 +113,29 @@ function CarSelection(props) {
           ).toFixed(0)
         : rates.reservation.insurance[e.target.id - 14].total_owed;
 
-    document.getElementById(e.target.id).checked
+    checkbox(e.target.id).checked
       ? setInsurance((prev) => Number(prev) + Number(price))
       : setInsurance((prev) => Number(prev) - Number(price));
 
     rates.reservation.insurance[e.target.id - 14].selected = !rates.reservation
       .insurance[e.target.id - 14].selected;
 
-    document.getElementById(e.target.id).checked
+    checkbox(e.target.id).checked
       ? (rates.reservation.insurance[e.target.id - 14].selection_note =
           "ACCEPTED")
       : (rates.reservation.insurance[e.target.id - 14].selection_note =
           "DECLINED");
 
-    setInsuranceArray(() => {
-      return rates.reservation.insurance.filter((ins, index) => {
-        return document.getElementById(index + 14).checked === true
-          ? ins
-          : null;
-      });
+    setInsuranceArray((prev) => {
+      // return rates.reservation.insurance.filter((ins, index) => {
+      //   return checkbox(index + 14).checked === true ? ins : null;
+      // });
+      return checkbox(e.target.id).checked === true
+        ? [...prev, rates.reservation.insurance[e.target.id - 14]]
+        : [...prev].filter(
+            (item) =>
+              item.code !== rates.reservation.insurance[e.target.id - 14].code
+          );
     });
   };
 
@@ -371,7 +386,7 @@ function CarSelection(props) {
                 className="col-lg-2 col-md-3 col-sm-4 extra-div"
               >
                 <h4 style={{ marginBottom: "0" }}>{extra.code}</h4>
-                <h5>Default</h5>
+                <h5 style={{ marginTop: "2rem" }}>Default</h5>
               </div>
             ) : (
               <div
@@ -418,7 +433,7 @@ function CarSelection(props) {
                 <h4>
                   {ins.name.substring(ins.name.length - 5, ins.name.length)}
                 </h4>
-                <h5>Default</h5>
+                <h5 style={{ marginTop: "2rem" }}>Default</h5>
               </div>
             ) : (
               <div key={index + 1} className="col-lg-3 col-md-6 insurance-div">
