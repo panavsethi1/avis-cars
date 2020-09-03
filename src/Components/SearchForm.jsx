@@ -58,44 +58,49 @@ function SearchForm(props) {
 
   //Handling submit click
   const handleClick = (e) => {
-    axios
-      .get("https://stage.abgapiservices.com:443/cars/catalog/v1/vehicles", {
-        headers: {
-          client_id: clientID,
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        params: {
-          brand: "Avis",
-          pickup_date: pickupDate,
-          pickup_location: pickupLocation || props.pickupLoc,
-          dropoff_date: dropoffDate,
-          dropoff_location: dropoffLocation || props.dropoffLoc,
-          country_code: countryCode || "IN",
-        },
-      })
-      .then((resp) =>
-        history.push({
-          pathname: "/results",
-          state: {
-            result: resp.data.vehicles,
-            pickup_location: pickupLocation || props.pickupLoc,
-            dropoff_location: dropoffLocation || props.dropoffLoc,
+    if (
+      !pickupDate ||
+      !dropoffDate ||
+      (!pickupLocation && !props.pickupLoc) ||
+      (!dropoffLocation && !props.dropoffLoc)
+    ) {
+      alert("Please fill in all the details.");
+    } else {
+      axios
+        .get("https://stage.abgapiservices.com:443/cars/catalog/v1/vehicles", {
+          headers: {
+            client_id: clientID,
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          params: {
+            brand: "Avis",
             pickup_date: pickupDate,
+            pickup_location: pickupLocation || props.pickupLoc,
             dropoff_date: dropoffDate,
-            country_code: countryCode,
-            token: token,
+            dropoff_location: dropoffLocation || props.dropoffLoc,
+            country_code: countryCode || "IN",
           },
         })
-      )
-      .catch((err) => {
-        console.log(err);
-        alert(err.response.data.status.errors[0].details);
-      });
-
-    // if (!pickupDate || !dropoffDate || (!pickupLocation && !props.pickupLoc) || (!dropoffLocation && !props.dropoffLoc)) {
-    //     alert("Please fill in all the details.")
-    // }
+        .then((resp) =>
+          history.push({
+            pathname: "/cars",
+            state: {
+              result: resp.data.vehicles,
+              pickup_location: pickupLocation || props.pickupLoc,
+              dropoff_location: dropoffLocation || props.dropoffLoc,
+              pickup_date: pickupDate,
+              dropoff_date: dropoffDate,
+              country_code: countryCode,
+              token: token,
+            },
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data.status.errors[0].details);
+        });
+    }
   };
 
   function disabledPickupDate(current) {
@@ -111,7 +116,11 @@ function SearchForm(props) {
       <div className="col-md-6">
         <h6 style={{ textAlign: "left" }}>Pick-up Location</h6>
         <CityAutoComplete
-          placeholder="City, Airport"
+          placeholder={
+            <span>
+              <i className="fas fa-map-marker-alt"></i> City, Airport
+            </span>
+          }
           style={{ width: "100%" }}
           cb={handlePickupChange}
           token={token}
@@ -140,9 +149,16 @@ function SearchForm(props) {
         <div onClick={() => setIsClicked(true)}>
           <CityAutoComplete
             placeholder={
-              isClicked
-                ? "City, Airport"
-                : "Same as Pick-up Location. Click to change."
+              isClicked ? (
+                <span>
+                  <i className="fas fa-map-marker-alt"></i> City, Airport
+                </span>
+              ) : (
+                <span>
+                  <i className="fas fa-map-marker-alt"></i> Same as Pick-up
+                  Location. Click to change.
+                </span>
+              )
             }
             style={{ width: "100%" }}
             cb={handleDropoffChange}
@@ -166,7 +182,7 @@ function SearchForm(props) {
           </div>
         </div>
       </div>
-      <form action="/results">
+      <form action="/cars">
         <button
           type="button"
           onClick={handleClick}

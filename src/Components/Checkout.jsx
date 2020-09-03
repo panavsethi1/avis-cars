@@ -109,7 +109,7 @@ function Checkout() {
         .then((resp) => {
           console.log(resp);
           history.push(
-            `/results/${location.state.info.car.category.name}/reservation`,
+            `/cars/${location.state.info.car.category.name}/reservation`,
             { res: resp.data, user: user }
           );
         })
@@ -196,7 +196,7 @@ function Checkout() {
           </p>
           <Link
             to={{
-              pathname: `/results/${location.state.info.car.category.name}/reservation`,
+              pathname: `/cars/${location.state.info.car.category.name}/reservation`,
             }}
           >
             <button

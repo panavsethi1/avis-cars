@@ -466,7 +466,7 @@ function CarSelection(props) {
       <div style={{ textAlign: "center" }}>
         <Link
           to={{
-            pathname: `/results/${car.category.name}/terms&conditions`,
+            pathname: `/cars/${car.category.name}/terms&conditions`,
             state: {
               reservationInfo: {
                 ...location.state,

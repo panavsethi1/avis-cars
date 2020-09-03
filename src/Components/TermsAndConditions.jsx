@@ -31,17 +31,31 @@ function TermsAndConditions() {
     return HtmlToText.fromString(x, {
       ignoreHref: true,
       ignoreImage: true,
-    })
-  }
+    });
+  };
 
   return (
-    <div className="container" style={{ textAlign: "center", margin: "2rem auto", padding: "2rem" ,border: "thick solid #ed8323", borderRadius:"10px"}}>
-    <h1>Terms & Conditions</h1>
+    <div
+      className="container"
+      style={{
+        textAlign: "center",
+        margin: "2rem auto",
+        padding: "2rem",
+        border: "thick solid #ed8323",
+        borderRadius: "10px",
+      }}
+    >
+      <h1>Terms & Conditions</h1>
       {tAndC.map((term, index) => {
         return (
           <div key={index + 1}>
             <h4>{term.header}</h4>
-            <p>{htmlToText(term.content).substring(0, htmlToText(term.content).length - 4)}</p>
+            <p>
+              {htmlToText(term.content).substring(
+                0,
+                htmlToText(term.content).length - 4
+              )}
+            </p>
           </div>
         );
       })}
@@ -49,10 +63,12 @@ function TermsAndConditions() {
         <input onChange={onCheck} id="terms" type="checkbox"></input> "I agree
         to the terms and conditions. Let's proceed to checkout."
       </p>
-      <Link to={{
-        pathname: `/results/${location.state.car.category.name}/checkout`,
-        state: {info: location.state}
-      }}>
+      <Link
+        to={{
+          pathname: `/cars/${location.state.car.category.name}/checkout`,
+          state: { info: location.state },
+        }}
+      >
         <button
           type="button"
           id="checkout"

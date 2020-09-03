@@ -15,10 +15,14 @@ body {
 }
 
 .city-searches {
-  margin-top: 3rem;
   padding: 2rem;
   padding-top: 0rem;
-  width: 65%;
+  background-color: white;
+}
+
+.hotel-city-searches {
+  padding: 2rem;
+  padding-top: 0rem;
   background-color: white;
 }
 
@@ -45,13 +49,20 @@ body {
   color: white;
 }
 
+.rooms {
+  background-color: #ed8323;
+  margin: auto 0.5rem;
+}
+
 .accOptions {
   position: relative;
   left: 10rem;
 }
-
+.tabs {
+  width: 65%;
+}
 @media (max-width: 992px) {
-  .city-searches {
+  .tabs {
     width: 100%;
   }
   .accOptions {
@@ -114,6 +125,18 @@ body {
   border: solid #ed8323;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.hotel-search-update {
+  border: solid #ed8323;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 75%;
+}
+
+.star {
+  color: #ed8323;
 }
 
 .car {
@@ -183,6 +206,11 @@ hr {
   margin-bottom: 2rem;
   margin-left: 0;
   width: 30%;
+}
+
+.btn-org {
+  background-color: #ed8323;
+  color: white;
 }
 
 a.res:hover {

@@ -16,6 +16,8 @@ import TermsAndConditions from "./Components/TermsAndConditions";
 import Checkout from "./Components/Checkout";
 import Reservation from "./Components/Reservation";
 import OldReservation from "./Components/OldReservation";
+import Rooms from "./Components/Rooms";
+import HotelResults from "./Components/HotelResults";
 
 function App() {
   return (
@@ -25,27 +27,25 @@ function App() {
 
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/reservation" exact component={OldReservation} />
+          <Route path="/car-reservation" exact component={OldReservation} />
           <Route path="/myaccount" component={NotFoundPage} />
           <Route
-            path="/results"
+            path="/cars"
             exact
             render={(props) => {
               return <Results {...props} key={uuid()} />;
             }}
           />
-          <Route path="/results/:name" exact component={CarSelection} />
+          <Route path="/rooms" component={Rooms} />
+          <Route path="/hotels" component={HotelResults} />
+          <Route path="/cars/:name" exact component={CarSelection} />
           <Route
-            path="/results/:name/terms&conditions"
+            path="/cars/:name/terms&conditions"
             exact
             component={TermsAndConditions}
           />
-          <Route path="/results/:name/checkout" exact component={Checkout} />
-          <Route
-            path="/results/:name/reservation"
-            exact
-            component={Reservation}
-          />
+          <Route path="/cars/:name/checkout" exact component={Checkout} />
+          <Route path="/cars/:name/reservation" exact component={Reservation} />
           <Redirect to="/" path="/logout" />
         </Switch>
 

@@ -85,22 +85,35 @@ function Results() {
                 </div>
 
                 <div className="col-md-4 align">
-                  {car.rate_totals.rate.currency === "USD" || "INR" || "GBP" || "EUR" ? <i className="fas fa-rupee-sign fa-3x"></i> : <h2>{car.rate_totals.rate.currency}</h2>}
+                  {car.rate_totals.rate.currency === "USD" ||
+                  "INR" ||
+                  "GBP" ||
+                  "EUR" ? (
+                    <i className="fas fa-rupee-sign fa-3x"></i>
+                  ) : (
+                    <h2>{car.rate_totals.rate.currency}</h2>
+                  )}
                   <h3>
-                    {
-                      car.rate_totals.rate.currency === "USD" ? 
-                      ((1/rates.USD)*car.rate_totals.pay_later.reservation_total).toFixed(2) : 
-                      car.rate_totals.rate.currency === "GBP" ? 
-                      ((1/rates.GBP)*car.rate_totals.pay_later.reservation_total).toFixed(2) :
-                      car.rate_totals.rate.currency === "EUR" ?
-                      ((1/rates.EUR)*car.rate_totals.pay_later.reservation_total).toFixed(2) :
-                      car.rate_totals.pay_later.reservation_total 
-
-                    }
+                    {car.rate_totals.rate.currency === "USD"
+                      ? (
+                          (1 / rates.USD) *
+                          car.rate_totals.pay_later.reservation_total
+                        ).toFixed(2)
+                      : car.rate_totals.rate.currency === "GBP"
+                      ? (
+                          (1 / rates.GBP) *
+                          car.rate_totals.pay_later.reservation_total
+                        ).toFixed(2)
+                      : car.rate_totals.rate.currency === "EUR"
+                      ? (
+                          (1 / rates.EUR) *
+                          car.rate_totals.pay_later.reservation_total
+                        ).toFixed(2)
+                      : car.rate_totals.pay_later.reservation_total}
                   </h3>
                   <Link
                     to={{
-                      pathname: `/results/${car.category.name}`,
+                      pathname: `/cars/${car.category.name}`,
                       state: {
                         result: results,
                         pickup_location: pickupLoc,
