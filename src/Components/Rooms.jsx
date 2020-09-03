@@ -11,26 +11,26 @@ function Rooms(props) {
   const [room1, setRoom1] = useState({
     type: "Room-1",
     adults: 1,
-    children: 1,
-    children_ages: [7],
+    children: 0,
+    children_ages: [],
   });
   const [room2, setRoom2] = useState({
     type: "Room-2",
     adults: 1,
-    children: 1,
-    children_ages: [7],
+    children: 0,
+    children_ages: [],
   });
   const [room3, setRoom3] = useState({
     type: "Room-3",
     adults: 1,
-    children: 1,
-    children_ages: [7],
+    children: 0,
+    children_ages: [],
   });
   const [room4, setRoom4] = useState({
     type: "Room-4",
     adults: 1,
-    children: 1,
-    children_ages: [7],
+    children: 0,
+    children_ages: [],
   });
   const [roomDetails, setRoomDetails] = useState([]);
 
@@ -52,28 +52,28 @@ function Rooms(props) {
       ? setRoom4({
           type: "Room-4",
           adults: 1,
-          children: 1,
-          children_ages: [7],
+          children: 0,
+          children_ages: [],
         })
       : rooms === 3
       ? setRoom3({
           type: "Room-3",
           adults: 1,
-          children: 1,
-          children_ages: [7],
+          children: 0,
+          children_ages: [],
         })
       : rooms === 2
       ? setRoom2({
           type: "Room-2",
           adults: 1,
-          children: 1,
-          children_ages: [7],
+          children: 0,
+          children_ages: [],
         })
       : setRoom1({
           type: "Room-1",
           adults: 1,
-          children: 1,
-          children_ages: [7],
+          children: 0,
+          children_ages: [],
         });
   };
 
@@ -96,10 +96,16 @@ function Rooms(props) {
             children: value,
             children_ages: [7, 7],
           }
-        : {
+        : value === 3
+        ? {
             ...prev,
             children: value,
             children_ages: [7, 7, 7],
+          }
+        : {
+            ...prev,
+            children: 0,
+            children_ages: [],
           };
     });
   };
@@ -124,10 +130,16 @@ function Rooms(props) {
             children: value,
             children_ages: [7, 7],
           }
-        : {
+        : value === 3
+        ? {
             ...prev,
             children: value,
             children_ages: [7, 7, 7],
+          }
+        : {
+            ...prev,
+            children: 0,
+            children_ages: [],
           };
     });
   };
@@ -152,10 +164,16 @@ function Rooms(props) {
             children: value,
             children_ages: [7, 7],
           }
-        : {
+        : value === 3
+        ? {
             ...prev,
             children: value,
             children_ages: [7, 7, 7],
+          }
+        : {
+            ...prev,
+            children: 0,
+            children_ages: [],
           };
     });
   };
@@ -180,10 +198,16 @@ function Rooms(props) {
             children: value,
             children_ages: [7, 7],
           }
-        : {
+        : value === 3
+        ? {
             ...prev,
             children: value,
             children_ages: [7, 7, 7],
+          }
+        : {
+            ...prev,
+            children: 0,
+            children_ages: [],
           };
     });
   };
@@ -277,9 +301,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom1ChildrenChange}
                 value={room1.children}
               />
@@ -349,9 +373,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom1ChildrenChange}
                 value={room1.children}
               />
@@ -416,9 +440,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom2ChildrenChange}
                 value={room2.children}
               />
@@ -487,9 +511,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom1ChildrenChange}
                 value={room1.children}
               />
@@ -554,9 +578,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom2ChildrenChange}
                 value={room2.children}
               />
@@ -621,9 +645,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom3ChildrenChange}
                 value={room3.children}
               />
@@ -691,9 +715,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom1ChildrenChange}
                 value={room1.children}
               />
@@ -758,9 +782,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom2ChildrenChange}
                 value={room2.children}
               />
@@ -825,9 +849,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom3ChildrenChange}
                 value={room3.children}
               />
@@ -892,9 +916,9 @@ function Rooms(props) {
                 }}
                 style={{ width: "100%" }}
                 size="small"
-                min={1}
+                min={0}
                 max={3}
-                defaultValue={1}
+                defaultValue={0}
                 onChange={handleRoom4ChildrenChange}
                 value={room4.children}
               />

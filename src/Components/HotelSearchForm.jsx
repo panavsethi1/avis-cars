@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const { Option } = AutoComplete;
 
 function HotelSearchForm() {
+  const [checkin, setCheckin] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [hotelToken, setHotelToken] = useState("");
@@ -24,7 +25,11 @@ function HotelSearchForm() {
   const disabledCheckInDate = (current) => {
     return current && current < moment().endOf("day");
   };
+  const disabledCheckOutDate = (day) => {
+    return day && day < checkin;
+  };
   const handleCheckInDateChange = (e) => {
+    setCheckin(e);
     if (e !== null) {
       setCheckInDate(
         e.toISOString(true).substring(0, 10).split("-").reverse().join("/")
@@ -102,7 +107,7 @@ function HotelSearchForm() {
           <h6 style={{ textAlign: "left" }}>Check-out</h6>
           <DatePicker
             className="date"
-            disabledDate={disabledCheckInDate}
+            disabledDate={disabledCheckOutDate}
             showToday={false}
             onChange={handleCheckOutDateChange}
           />
