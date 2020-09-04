@@ -42,7 +42,9 @@ function HotelResults() {
                 <h2 style={{ textAlign: "center" }}>{hotel.name}</h2>
                 {type.length ? (
                   <h3 style={{ marginBottom: "2rem", textAlign: "center" }}>
-                    {type.substring(0, desc.indexOf("|")) || type}.
+                    {type.includes("|")
+                      ? type.substring(0, type.indexOf("|"))
+                      : type}
                   </h3>
                 ) : null}
 
@@ -129,7 +131,7 @@ function HotelResults() {
                 </div>
                 {desc.length ? (
                   <h5 style={{ marginTop: "2rem", textAlign: "center" }}>
-                    *{desc.substring(0, desc.indexOf("|")) || desc}.
+                    *{desc.substring(0, desc.indexOf("|")) || desc}
                   </h5>
                 ) : null}
               </div>
