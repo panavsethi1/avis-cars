@@ -16,9 +16,8 @@ function HotelResults() {
         const type = hotel.room_details[0].type;
         const desc = hotel.room_details[0].desc;
         return (
-          <div>
+          <div key={hotel.id} id={hotel.id}>
             <div
-              key={hotel.id}
               className="row"
               style={{
                 border: "solid #ed8323",
@@ -41,12 +40,9 @@ function HotelResults() {
               </div>
               <div className="col-md-8">
                 <h2 style={{ textAlign: "center" }}>{hotel.name}</h2>
-                {hotel.room_details[0].type.length ? (
+                {type.length ? (
                   <h3 style={{ marginBottom: "2rem", textAlign: "center" }}>
-                    {hotel.room_details[0].type.substring(
-                      0,
-                      hotel.room_details[0].type.indexOf("|")
-                    ) + "."}
+                    {type.substring(0, desc.indexOf("|")) || type}.
                   </h3>
                 ) : null}
 
@@ -131,14 +127,9 @@ function HotelResults() {
                     </h3>
                   </div>
                 </div>
-                {hotel.room_details[0].desc.length ? (
+                {desc.length ? (
                   <h5 style={{ marginTop: "2rem", textAlign: "center" }}>
-                    {"*" +
-                      hotel.room_details[0].desc.substring(
-                        0,
-                        hotel.room_details[0].desc.indexOf("|")
-                      ) +
-                      "."}
+                    *{desc.substring(0, desc.indexOf("|")) || desc}.
                   </h5>
                 ) : null}
               </div>
