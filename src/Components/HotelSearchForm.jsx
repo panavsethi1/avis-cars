@@ -16,7 +16,7 @@ function HotelSearchForm() {
   const [selectedCity, setSelectedCity] = useState({});
 
   useEffect(() => {
-    Axios.post("https://api.dev.trawish.com/oauth2/token", {
+    Axios.post("https://api.tmp.trawish.com/v1/user/token", {
       client_id: "5ec43cdb6df0521da0092524",
       client_secret: "hrSZ5KHuzWJ3Vdd6c6sJLf2T1jcyv32z",
     }).then((res) => setHotelToken(res.data.access_token));
@@ -44,15 +44,16 @@ function HotelSearchForm() {
     }
   };
   const handleCityChange = (value) => {
-    Axios.get("https://api.dev.trawish.com/v1/services/city-autocomplete", {
-      headers: {
-        Authorization: "Bearer " + hotelToken,
-      },
-      params: {
-        key_word: value,
-      },
-    }).then((res) => {
-      setCityOptions(res.data);
+    Axios.get(
+      `https://api.tmp.trawish.com/v1/destinations?limit=50&page=1&term=${value}`,
+      {
+        headers: {
+          Authorization: "Bearer " + hotelToken,
+        },
+      }
+    ).then((res) => {
+      setCityOptions(res.data.data);
+      console.log(res.data.data);
     });
   };
 
@@ -81,14 +82,14 @@ function HotelSearchForm() {
         style={{ width: "100%" }}
         onSelect={(value) => {
           const loc = cityOptions.find((location) => {
-            return location.name === value;
+            return location.destination === value;
           });
           setSelectedCity(loc);
         }}
       >
         {cityOptions.map((location, inx) => (
-          <Option key={inx} value={location.name}>
-            {location.name}
+          <Option key={inx} value={location.destination}>
+            {location.destination}
           </Option>
         ))}
       </AutoComplete>

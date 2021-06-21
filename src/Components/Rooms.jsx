@@ -8,6 +8,7 @@ function Rooms(props) {
   const history = useHistory();
 
   const [rooms, setRooms] = useState(1);
+  const [stars, setStars] = useState(3);
   const [room1, setRoom1] = useState({
     type: "Room-1",
     adults: 1,
@@ -215,14 +216,23 @@ function Rooms(props) {
 
   const handleSearch = (e) => {
     Axios.post(
-      "https://api.dev.trawish.com/v1/services/hotels",
+      "https://api.tmp.trawish.com/v1/services/hotels",
       {
         arrival_date: location.state.checkInDate,
         departure_date: location.state.checkOutDate,
         country_code: location.state.selectedCity.country_code,
         city: location.state.selectedCity.city_code,
         guest_nationality: "IN",
-        hotel_ratings: [1, 2, 3, 4, 5],
+        hotel_ratings:
+          stars === 1
+            ? [1, 2, 3, 4, 5]
+            : stars === 2
+            ? [2, 3, 4, 5]
+            : stars === 3
+            ? [3, 4, 5]
+            : stars === 4
+            ? [4, 5]
+            : [5],
         rooms:
           rooms === 1
             ? [room1]
@@ -966,6 +976,19 @@ function Rooms(props) {
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4">
+            <h6 style={{ marginTop: "1rem" }}>Stars: {stars}+</h6>
+            <Slider
+              defaultValue={3}
+              max={5}
+              min={1}
+              trackStyle={{ backgroundColor: "#ed8323" }}
+              handleStyle={{ borderColor: "#ed8323" }}
+              style={{ margin: "1rem auto 0" }}
+              tooltipVisible={false}
+              onChange={(value) => {
+                setStars(value);
+              }}
+            />
             <Link
               to={{
                 pathname: "/hotels",
@@ -975,7 +998,7 @@ function Rooms(props) {
                 type="button"
                 onClick={handleSearch}
                 className="btn btn-orange btn-lg"
-                style={{ margin: "2rem auto 0", width: "100%" }}
+                style={{ margin: "1.5rem auto 0", width: "100%" }}
               >
                 Search for Hotels
               </button>
